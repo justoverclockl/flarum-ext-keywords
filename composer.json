@@ -1,0 +1,42 @@
+{
+  "name": "justoverclock/flarum-ext-keywords",
+  "description": "Add a Glossary to your Flarum",
+  "keywords": [
+    "flarum",
+      "glossary"
+  ],
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^0.1.0-beta.16"
+  },
+  "require-dev": {
+    "flarum/testing": "^0.1.0-beta.16"
+  },
+  "authors": [
+    {
+      "name": "Marco Colia",
+      "email": "info@flarum.it",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Justoverclock\\Keywords\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Keywords",
+      "category": "",
+      "icon": {
+        "name": "fas fa-atlas",
+        "backgroundColor": "green",
+        "color": "white"
+      }
+    },
+    "flagrow": {
+      "discuss": ""
+    }
+  }
+}
