@@ -25,7 +25,7 @@ export default function () {
     let tooltip = mappings[match.toLowerCase()];
 
     if (tooltip) {
-      return `<span class="definition" title="${tooltip}">${match}</span>`;
+      return `<span class="definition" data-tooltip="${tooltip}">${match}<i class="fas fa-caret-left"></i></i></span>`;
     } else {
       return match;
     }
