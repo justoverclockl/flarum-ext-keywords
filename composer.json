@@ -2,8 +2,9 @@
   "name": "justoverclock/flarum-ext-keywords",
   "description": "Add a Glossary to your Flarum",
   "keywords": [
-    "flarum",
-      "glossary"
+      "flarum",
+      "glossary",
+      "keywords"
   ],
   "type": "flarum-extension",
   "license": "MIT",

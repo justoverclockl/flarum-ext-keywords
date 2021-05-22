@@ -1,18 +1,31 @@
-const mappings = {
-  flarum: 'Flarum è un potente software per creare forum di discussione nel suo sito web.',
-  composer: 'Composer  è un dependecy manager che si utilizza per aggiornare o installare estensioni di Flarum',
-  require: 'u require this?',
-  tag: 'Sono le sezioni del forum'
-};
+/*
+ * This file is part of justoverclock/flarum-ext-keywords.
+ *
+ * Copyright (c) 2021 Marco Colia.
+ * Special thanks to Askvortsov
+ * https://flarum.it
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
 
-const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+
+import app from 'flarum/app';
 
 export default function () {
+
+  // Lettura dell'input form in formato JSON
+  const mappings = JSON.parse(app.forum.attribute('AdDef'));
+
+  // Regex per il riconoscimento delle parole da sostituire
+  const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+
   this.attrs.post.data.attributes.contentHtml = this.attrs.post.data.attributes.contentHtml.replace(regex, (match) => {
+
     let tooltip = mappings[match.toLowerCase()];
 
     if (tooltip) {
-      return `<span class="glossary" title="${tooltip}">${match}</span>`;
+      return `<span class="definition" title="${tooltip}">${match}</span>`;
     } else {
       return match;
     }

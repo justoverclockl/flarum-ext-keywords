@@ -1,0 +1,6 @@
+flarum-ext-keywords:
+  admin:
+    word: Word
+    removedef: Delete definition
+    definition: Definition
+
