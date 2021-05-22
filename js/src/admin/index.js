@@ -41,7 +41,7 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
             <input class="fieldinp" value={row[1]} onchange={(e) => updateMappings(stream, row[0], row[0], e.target.value)}></input></label>
         {i !== rows.length - 1 && (
           <button class="Button Button--primary" type="button" onclick={() => updateMappings(stream, row[0], row[0], undefined)}>
-            {app.translator.trans('flarum-ext-keywords.admin.removedef')}
+            <i className="far fa-trash-alt"></i>
           </button>
         )}
       </div>
