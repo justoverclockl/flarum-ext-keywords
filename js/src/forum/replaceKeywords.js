@@ -18,7 +18,14 @@ export default function () {
   const mappings = JSON.parse(app.forum.attribute('AdDef'));
 
   // Regex per il riconoscimento delle parole da sostituire (attualmente rimuovendo la G possiamo limitare a 1 parola)
-  const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+  let regex;
+
+  // imposto una condizione che effettua il parsing 1 volta sola se il boolean nel backend è true
+  if (app.forum.attribute('ParseOnce') === true) {
+    regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'i');
+  } else {
+    regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+  }
 
   this.attrs.post.data.attributes.contentHtml = this.attrs.post.data.attributes.contentHtml.replace(regex, (match) => {
 

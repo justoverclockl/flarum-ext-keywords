@@ -26,4 +26,5 @@ return [
     new Extend\Locales(__DIR__.'/resources/locale'),
     (new Extend\Settings)
         ->serializeToForum('AdDef', 'justoverclock-keywords.AdDef'),
+    (new Extend\Settings())->serializeToForum('ParseOnce', 'justoverclock-keywords.parse.once', 'boolval', false),
 ];
