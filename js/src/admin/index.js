@@ -13,7 +13,7 @@ import app from 'flarum/app';
 
 function updateMappings(stream, oldkey, key, value) {
 
-  const mappings = JSON.parse(stream() || '{}');
+  const mappings = JSON.parse(stream() || "{}");
 
   if (mappings[oldkey]) delete mappings[oldkey]
   mappings[key] = value;
@@ -26,7 +26,7 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
   app.extensionData.for('justoverclock-keywords').registerSetting(function () {
 
     const stream = this.setting('justoverclock-keywords.AdDef');
-    const mappings = JSON.parse(stream() || '{}');
+    const mappings = JSON.parse(stream() || "{}");
     const rows = Object.keys(mappings).map((key) => [key, mappings[key]]);
 
     // Aggiunta di un nuovo campo vuoto ad ogni inserimento
