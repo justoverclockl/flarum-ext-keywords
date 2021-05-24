@@ -19,7 +19,7 @@ Simply install the extension, and add your word and definitions through the exte
 Install with composer:
 
 ```sh
-composer require justoverclock/flarum-ext-keywords
+composer require justoverclock/flarum-ext-keywords:*
 ```
 
 ### Updating
