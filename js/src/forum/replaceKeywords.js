@@ -17,15 +17,16 @@ export default function () {
   // Lettura dell'input form in formato JSON
   const mappings = JSON.parse(app.forum.attribute('AdDef'));
 
-  // Regex per il riconoscimento delle parole da sostituire (attualmente rimuovendo la G possiamo limitare a 1 parola)
-  let regex;
+  // filtro per evitare il parsing doppio delle parole
+  Object.keys(mappings).filter(w => {
 
-  // imposto una condizione che effettua il parsing 1 volta sola se il boolean nel backend è true
-  if (app.forum.attribute('ParseOnce') === true) {
-    regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'i');
-  } else {
-    regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
-  }
+    let regex;
+
+    if (app.forum.attribute('ParseOnce') === true) {
+     regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'i');
+    } else {
+      regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+    }
 
   this.attrs.post.data.attributes.contentHtml = this.attrs.post.data.attributes.contentHtml.replace(regex, (match) => {
 
@@ -35,6 +36,7 @@ export default function () {
       return `<span class="definition" data-tooltip="${tooltip}">${match}<i class="fas fa-caret-left"></i></i></span>`;
     } else {
       return match;
-    }
-  });
+     }
+   });
+ })
 }
