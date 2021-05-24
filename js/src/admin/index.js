@@ -27,6 +27,7 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
 
     const stream = this.setting('justoverclock-keywords.AdDef');
     const mappings = JSON.parse(stream());
+    console.log(stream())
     const rows = Object.keys(mappings).map((key) => [key, mappings[key]]);
 
     // Aggiunta di un nuovo campo vuoto ad ogni inserimento
