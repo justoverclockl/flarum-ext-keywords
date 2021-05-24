@@ -13,7 +13,7 @@ import app from 'flarum/app';
 
 function updateMappings(stream, oldkey, key, value) {
 
-  const mappings = JSON.parse(stream());
+  const mappings = JSON.parse(stream() || '{}');
 
   if (mappings[oldkey]) delete mappings[oldkey]
   mappings[key] = value;
