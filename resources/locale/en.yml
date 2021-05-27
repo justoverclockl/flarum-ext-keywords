@@ -3,7 +3,7 @@ flarum-ext-keywords:
     title: Glossary
     pagetitle: Glossary Page
     tagline: Do you want to know more about the terms used on this site? See the Glossary to find out more
-    searchtext: Type so search through glossary...
+    searchtext: Type to search through glossary...
   admin:
     word: Word
     removedef: Delete definition
