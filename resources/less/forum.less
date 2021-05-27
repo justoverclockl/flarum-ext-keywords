@@ -97,3 +97,231 @@ i.fas.fa-caret-left {
 [data-tooltip-location="left"]:hover:after {
   transform: translateY(50%) scaleX(1);
 }
+
+
+ol {
+  -webkit-column-count: 2; /* Chrome/Opera, Safari */
+  -moz-column-count: 2; /* Mozilla Firefox */
+  column-count: 2;
+}
+
+
+ol {
+  counter-reset: li; /* Initiate a counter */
+  list-style: none; /* Remove default numbering */
+  *list-style: decimal; /* Keep using default numbering for IE6/7 */
+  font: 15px 'trebuchet MS', 'lucida sans';
+  padding: 0;
+  margin-bottom: 4em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+/*  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;*/
+}
+
+ol ol {
+  margin: 0 0 0 2em; /* Add some left margin for inner lists */
+}
+
+.glostitle{
+ color: @primary-color;
+}
+.tagline{
+  color: @primary-color;
+}
+
+.glostitle:before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f558";
+  color: #FF8500;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  font-weight:900;
+}
+
+.rectangle-list li{
+  position: relative;
+  width: 86%;
+  display: inline-block;
+  padding: .4em .4em .4em .8em;
+  *padding: .4em;
+  margin: .5em 0 .5em 2.5em;
+  background: #E8ECF3;
+  color: #444;
+  text-decoration: none;
+  transition: all .3s ease-out;
+}
+
+.rectangle-list li:hover{
+  background: #eee;
+}
+
+.rectangle-list li:before{
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #ff8500;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.rectangle-list li:after{
+  position: absolute;
+  content: '';
+  border: .5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -.5em;
+  transition: all .3s ease-out;
+}
+
+.rectangle-list li:hover:after{
+  left: -.5em;
+  border-left-color: #ff8500;
+}
+
+
+/* search form */
+.cf:before, .cf:after{
+  content:"";
+  display:table;
+}
+
+.cf:after{
+  clear:both;
+}
+
+.cf{
+  zoom:1;
+}
+
+/* Form wrapper styling */
+.search-wrapper {
+  width: 220px;
+  margin: 45px auto 50px auto;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .4) inset, 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+/* Form text input */
+
+.search-wrapper input {
+  width: 138px;
+  height: 20px;
+  padding: 10px 5px;
+  float: left;
+  font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+  border: 0;
+  background: #EEE;
+  border-radius: 3px 0 0 3px;
+}
+
+.search-wrapper input:focus {
+  outline: 0;
+  background: #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.search-wrapper input::-webkit-input-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.search-wrapper input:-moz-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.search-wrapper input:-ms-input-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.columngl {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.rowgl:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*search form*/
+.searchform {
+  background: #f4f4f4;
+  background: rgba(244,244,244,0);
+  border: 1px solid #d3d3d3;
+  /* margin-top: 60px; */
+  margin: auto;
+  /* left: 50%; */
+  /* padding-right: 50px; */
+  padding: 2px 5px;
+  /* margin-right: 50px; */
+  /* position: relative; */
+  /* margin: 13px 0 0 -200px; */
+  top: 50%;
+  width: 223px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.searchform input, .searchform button {
+  float: left
+}
+.searchform input {
+  background:#fefefe;
+  border: none;
+  font:12px/12px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  margin-right: 5px;
+  padding: 10px;
+  width: 216px;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px
+}
+.searchform input:focus {
+  outline: none;
+}
+.searchform input::-webkit-input-placeholder {
+  font-style: italic;
+  line-height: 15px
+}
+
+.searchform input:-moz-placeholder {
+  font-style: italic;
+  line-height: 15px
+}
+
+.searchform button {
+  background:  @primary-color;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34adec', endColorstr='#2691dc',GradientType=0 );
+  border: none;
+  color:#fff;
+  cursor: pointer;
+  font: 13px/13px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  padding: 10px;
+  width:106px;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+}
+.searchform button:hover {
+  opacity:.9;
+}
+.rightdiv {
+  padding: 13px;
+}

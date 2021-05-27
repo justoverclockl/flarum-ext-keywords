@@ -12,10 +12,9 @@
 import app from 'flarum/app';
 
 function updateMappings(stream, oldkey, key, value) {
+  const mappings = JSON.parse(stream() || '{}');
 
-  const mappings = JSON.parse(stream() || "{}");
-
-  if (mappings[oldkey]) delete mappings[oldkey]
+  if (mappings[oldkey]) delete mappings[oldkey];
   mappings[key] = value;
 
   const mappingsJSON = JSON.stringify(mappings);
@@ -28,22 +27,29 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
     label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
     type: 'boolean',
   });
+  app.extensionData.for('justoverclock-keywords').registerSetting({
+    setting: 'justoverclock-keywords.parse.once',
+    label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
+    type: 'boolean',
+  });
   app.extensionData.for('justoverclock-keywords').registerSetting(function () {
-
     const stream = this.setting('justoverclock-keywords.AdDef');
-    const mappings = JSON.parse(stream() || "{}");
+    const mappings = JSON.parse(stream() || '{}');
     const rows = Object.keys(mappings).map((key) => [key, mappings[key]]);
 
     // Aggiunta di un nuovo campo vuoto ad ogni inserimento
     rows.push(['', '']);
 
     return rows.map((row, i) => (
-
-        <div>
-          <label>{app.translator.trans('flarum-ext-keywords.admin.word')}:
-            <input class="fieldinp" value={row[0]} onchange={(e) => updateMappings(stream, row[0], e.target.value, row[1])}></input></label>
-          <label>{app.translator.trans('flarum-ext-keywords.admin.definition')}:
-            <input class="fieldinp" value={row[1]} onchange={(e) => updateMappings(stream, row[0], row[0], e.target.value)}></input></label>
+      <div>
+        <label>
+          {app.translator.trans('flarum-ext-keywords.admin.word')}:
+          <input class="fieldinp" value={row[0]} onchange={(e) => updateMappings(stream, row[0], e.target.value, row[1])}></input>
+        </label>
+        <label>
+          {app.translator.trans('flarum-ext-keywords.admin.definition')}:
+          <input class="fieldinp" value={row[1]} onchange={(e) => updateMappings(stream, row[0], row[0], e.target.value)}></input>
+        </label>
         {i !== rows.length - 1 && (
           <button class="Button Button--primary" type="button" onclick={() => updateMappings(stream, row[0], row[0], undefined)}>
             <i className="far fa-trash-alt"></i>
@@ -53,4 +59,3 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
     ));
   });
 });
-
