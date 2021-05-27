@@ -1,6 +1,6 @@
 # Keywords
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/justoverclock/flarum-ext-keywords.svg)](https://packagist.org/packages/justoverclock/flarum-ext-keywords) [![Total Downloads](https://poser.pugx.org/justoverclock/flarum-ext-keywords/downloads)](//packagist.org/packages/justoverclock/flarum-ext-keywords) [![Support Me](https://img.shields.io/badge/Donate-Support%20My%20Work-orange)](https://github.com/sponsors/justoverclockl)
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://poser.pugx.org/justoverclock/flarum-ext-keywords/v)](//packagist.org/packages/justoverclock/flarum-ext-keywords) [![Total Downloads](https://poser.pugx.org/justoverclock/flarum-ext-keywords/downloads)](//packagist.org/packages/justoverclock/flarum-ext-keywords) [![Support Me](https://img.shields.io/badge/Donate-Support%20My%20Work-orange)](https://github.com/sponsors/justoverclockl)
 
 A [Flarum](http://flarum.org) extension. This extension maps the words written in the posts and allows you to build a real glossary for your website.
 
