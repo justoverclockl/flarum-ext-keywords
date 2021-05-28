@@ -68,7 +68,7 @@ export default class GlossaryPage extends Page {
                 { id: 'myUL', className: 'rectangle-list' },
                 Object.keys(mappings)
                   .sort()
-                  .map((key) => m('li', { className: 'lista' }, key + ' - ' + 'Definition:   ' + mappings[key]))
+                  .map((key) => m('li', { className: 'lista' }, key + ' - ' +  mappings[key]))
               )
             )
           ),
