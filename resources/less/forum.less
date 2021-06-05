@@ -99,14 +99,14 @@ i.fas.fa-caret-left {
 }
 
 
-ol {
+ol.rectangle-list {
   -webkit-column-count: 2; /* Chrome/Opera, Safari */
   -moz-column-count: 2; /* Mozilla Firefox */
   column-count: 2;
 }
 
 
-ol {
+ol.rectangle-list {
   counter-reset: li; /* Initiate a counter */
   list-style: none; /* Remove default numbering */
   *list-style: decimal; /* Keep using default numbering for IE6/7 */
@@ -167,7 +167,7 @@ ol ol {
   left: -2.5em;
   top: 50%;
   margin-top: -1em;
-  background: #ff8500;
+  background: @primary-color;
   height: 2em;
   width: 2em;
   line-height: 2em;
@@ -188,7 +188,7 @@ ol ol {
 
 .rectangle-list li:hover:after{
   left: -.5em;
-  border-left-color: #ff8500;
+  border-left-color: @primary-color;
 }
 
 
