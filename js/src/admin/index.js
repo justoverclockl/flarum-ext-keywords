@@ -27,11 +27,6 @@ app.initializers.add('justoverclock/flarum-ext-keywords', () => {
     label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
     type: 'boolean',
   });
-  app.extensionData.for('justoverclock-keywords').registerSetting({
-    setting: 'justoverclock-keywords.parse.once',
-    label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
-    type: 'boolean',
-  });
   app.extensionData.for('justoverclock-keywords').registerSetting(function () {
     const stream = this.setting('justoverclock-keywords.AdDef');
     const mappings = JSON.parse(stream() || '{}');
