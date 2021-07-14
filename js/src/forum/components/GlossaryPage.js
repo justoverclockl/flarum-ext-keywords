@@ -6,6 +6,12 @@ import listItems from 'flarum/common/helpers/listItems';
 /*  global $  */
 
 export default class GlossaryPage extends Page {
+      oncreate(vnode) {
+        super.oncreate(vnode);
+        app.setTitle(app.translator.trans('flarum-ext-keywords.forum.pagetitle'));
+        app.setTitleCount(0);
+    }
+
   view() {
     const mappings = JSON.parse(app.forum.attribute('AdDef'));
 
