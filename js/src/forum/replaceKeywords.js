@@ -10,6 +10,7 @@
  */
 
 import app from 'flarum/app';
+import Tooltip from 'flarum/common/components/Tooltip';
 
 export default function () {
   // Lettura dell'input form in formato JSON
