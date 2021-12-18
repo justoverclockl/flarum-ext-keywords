@@ -10,11 +10,17 @@
  */
 
 import app from 'flarum/app';
-import Tooltip from 'flarum/common/components/Tooltip';
+
 
 export default function () {
+  const post = this.attrs.post;
+
+
   // Lettura dell'input form in formato JSON
-  const mappings = JSON.parse(app.forum.attribute('AdDef'));
+  const mappings = JSON.parse(app.forum.attribute('AdDef'))
+
+  if (mappings === {}) return;
+  if (Object.keys(mappings).length === 0) return;
 
   // filtro per evitare il parsing doppio delle parole
   Object.keys(mappings).filter((w) => {
@@ -26,7 +32,7 @@ export default function () {
       regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
     }
 
-    this.attrs.post.data.attributes.contentHtml = this.attrs.post.data.attributes.contentHtml.replace(regex, (match) => {
+    this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
       let tooltip = mappings[match.toLowerCase()];
 
       if (tooltip) {
