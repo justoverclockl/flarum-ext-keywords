@@ -11,51 +11,76 @@
 
 import app from 'flarum/app';
 
-function updateMappings(stream, oldkey, key, value) {
-  const mappings = JSON.parse(stream() || '{}');
-
-  if (mappings[oldkey]) delete mappings[oldkey];
-  mappings[key] = value;
-
+function updateMappings(stream, mappings) {
   const mappingsJSON = JSON.stringify(mappings);
   stream(mappingsJSON);
 }
 
 app.initializers.add('justoverclock/flarum-ext-keywords', () => {
-  app.extensionData
-    .for('justoverclock-keywords')
-    .registerSetting({
-      setting: 'justoverclock-keywords.parse.once',
-      label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
-      type: 'boolean',
-    })
-    .registerSetting(function () {
-      const stream = this.setting('justoverclock-keywords.AdDef');
-      const mappings = JSON.parse(stream() || '{}');
-      const rows = Object.keys(mappings).map((key) => [key, mappings[key]]);
+  app.extensionData.for('justoverclock-keywords').registerSetting({
+    setting: 'justoverclock-keywords.parse.once',
+    label: app.translator.trans('flarum-ext-keywords.admin.parseonce'),
+    type: 'boolean',
+  });
 
-      // Aggiunta di un nuovo campo vuoto ad ogni inserimento
+  app.extensionData.for('justoverclock-keywords').registerSetting(function () {
+    const stream = this.setting('justoverclock-keywords.AdDef');
+    let mappings = JSON.parse(stream() || '{}');
+    let rows = Object.entries(mappings);
+
+    const updateRow = (key, value, index) => {
+      rows[index] = [key, value];
+      mappings = Object.fromEntries(rows);
+      updateMappings(stream, mappings);
+    };
+
+    const addRow = () => {
       rows.push(['', '']);
+      mappings = Object.fromEntries(rows);
+      updateMappings(stream, mappings);
+    };
 
-      return rows.map((row, i) => (
-        <div>
-          <label>
-            {app.translator.trans('flarum-ext-keywords.admin.word')}:
-            <input class="fieldinp" value={row[0]}
-                   onchange={(e) => updateMappings(stream, row[0], e.target.value, row[1])}></input>
-          </label>
-          <label>
-            {app.translator.trans('flarum-ext-keywords.admin.definition')}:
-            <input class="fieldinp" value={row[1]}
-                   onchange={(e) => updateMappings(stream, row[0], row[0], e.target.value)}></input>
-          </label>
-          {i !== rows.length - 1 && (
-            <button class="Button Button--primary" type="button"
-                    onclick={() => updateMappings(stream, row[0], row[0], undefined)}>
-              <i className="far fa-trash-alt"></i>
-            </button>
-          )}
-        </div>
-      ));
-    });
+    const deleteRow = (index) => {
+      rows.splice(index, 1);
+      mappings = Object.fromEntries(rows);
+      updateMappings(stream, mappings);
+    };
+
+    const isDeletable = (index) => {
+      return rows.length > 1 || (rows.length === 1 && index === 0);
+    };
+
+    return (
+      <div>
+        {rows.map(([key, value], index) => (
+          <div>
+            <label>
+              {app.translator.trans('flarum-ext-keywords.admin.word')}:
+              <input
+                className="fieldinp"
+                value={key}
+                oninput={(e) => updateRow(e.target.value, value, index)}
+              />
+            </label>
+            <label>
+              {app.translator.trans('flarum-ext-keywords.admin.definition')}:
+              <input
+                className="fieldinp"
+                value={value}
+                oninput={(e) => updateRow(key, e.target.value, index)}
+              />
+            </label>
+            {isDeletable(index) && (
+              <button className="Button Button--primary" type="button" onclick={() => deleteRow(index)}>
+                <i className="far fa-trash-alt"></i>
+              </button>
+            )}
+          </div>
+        ))}
+        <button class="Button Button--primary addrowbtn" type="button" onclick={addRow}>
+          {app.translator.trans('flarum-ext-keywords.admin.addRow')}
+        </button>
+      </div>
+    );
+  });
 });

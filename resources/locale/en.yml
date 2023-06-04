@@ -9,4 +9,5 @@ flarum-ext-keywords:
     removedef: Delete definition
     definition: Definition
     parseonce: Parse the words once in a post
+    addRow: Add Definition
 

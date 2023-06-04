@@ -11,35 +11,27 @@
 
 import app from 'flarum/app';
 
-
 export default function () {
   const post = this.attrs.post;
 
+  // Read the form input as JSON
+  const mappings = JSON.parse(app.forum.attribute('AdDef'));
 
-  // Lettura dell'input form in formato JSON
-  const mappings = JSON.parse(app.forum.attribute('AdDef'))
+  if (Object.keys(mappings).length === 0) {
+    return;
+  }
 
-  if (mappings === {}) return;
-  if (Object.keys(mappings).length === 0) return;
+  const parseOnce = app.forum.attribute('ParseOnce') === true;
+  const regexFlags = parseOnce ? 'i' : 'gi';
+  const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', regexFlags);
 
-  // filtro per evitare il parsing doppio delle parole
-  Object.keys(mappings).filter((w) => {
-    let regex;
+  this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
+    const tooltip = mappings[match.toLowerCase()];
 
-    if (app.forum.attribute('ParseOnce') === true) {
-      regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'i');
+    if (tooltip) {
+      return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
     } else {
-      regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+      return match;
     }
-
-    this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
-      let tooltip = mappings[match.toLowerCase()];
-
-      if (tooltip) {
-        return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
-      } else {
-        return match;
-      }
-    });
   });
 }
