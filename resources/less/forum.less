@@ -340,3 +340,37 @@ ol ol {
     width: 100%!important;
   }
 }
+
+.containDef {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.defContainer {
+  border-top: 2px solid #ff8100 ;
+  padding: 1rem;
+  border-radius: 5px;
+  color: @primary-color;
+  flex: 0 0 250px;
+  transition: transform 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.defContainer:hover {
+  transform: scale(1.1); /* Enlarge the container on hover */
+}
+
+.loadMoreContainer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadMoreDefButton {
+
+}

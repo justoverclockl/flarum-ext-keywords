@@ -14,24 +14,25 @@ import app from 'flarum/app';
 export default function () {
   const post = this.attrs.post;
 
-  // Read the form input as JSON
-  const mappings = JSON.parse(app.forum.attribute('AdDef'));
+  if (post) {
+    const mappings = JSON.parse(app.forum.attribute('AdDef'));
 
-  if (Object.keys(mappings).length === 0) {
-    return;
-  }
-
-  const parseOnce = app.forum.attribute('ParseOnce') === true;
-  const regexFlags = parseOnce ? 'i' : 'gi';
-  const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', regexFlags);
-
-  this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
-    const tooltip = mappings[match.toLowerCase()];
-
-    if (tooltip) {
-      return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
-    } else {
-      return match;
+    if (Object.keys(mappings).length === 0) {
+      return;
     }
-  });
+
+    const parseOnce = app.forum.attribute('ParseOnce') === true;
+    const regexFlags = parseOnce ? 'i' : 'gi';
+    const regex = new RegExp('\\b(' + Object.keys(mappings).join('|') + ')\\b(?![^<]*>|[^<>]*</[^p])', regexFlags);
+
+    this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
+      const tooltip = mappings[match.toLowerCase()];
+
+      if (tooltip) {
+        return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
+      } else {
+        return match;
+      }
+    });
+  }
 }
